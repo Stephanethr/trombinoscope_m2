@@ -1,0 +1,183 @@
+/* ======= Variables et bases ======= */
+:root {
+  --bg: #f9fafb;
+  --card-bg: #ffffff;
+  --accent: #2a6f7b; /* violet indigo moderne */
+  --accent-light: #eef2ff;
+  --text-dark: #1e1e2f;
+  --text-light: #6b7280;
+  --shadow: rgba(79, 70, 229, 0.25);
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-dark);
+}
+
+/* ======= Header ======= */
+header {
+  background: linear-gradient(90deg, var(--accent), #3998a8);
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ======= Grille principale ======= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ======= Carte des personnes ======= */
+.card {
+  background: var(--card-bg);
+  border-radius: 18px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 10px 20px var(--shadow);
+  border-color: var(--accent);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 0.7rem 0;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.card p {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+/* ======= Page profil ======= */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  background: var(--accent-light);
+  min-height: 100vh;
+  /* keep header centered while content inside .profile-info will be left/justified */
+  text-align: center;
+}
+
+.profile img {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px var(--shadow);
+  margin-bottom: 1.5rem;
+  border: 4px solid var(--accent);
+}
+
+.profile-info {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 760px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  text-align: left;          /* ensure internal text is left-aligned */
+  margin-top: 1rem;
+}
+
+.profile-info h2 {
+  margin-top: 0;
+  color: var(--accent);
+  font-size: 1.6rem;
+}
+
+.profile-info p,
+.profile-info .bio {
+  text-align: justify;       /* the requested justified alignment */
+  text-justify: inter-word;  /* improve justification spacing */
+  line-height: 1.9;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  white-space: normal;
+}
+
+/* If you used <br> inside bio, keep normal white-space handling */
+.profile-info .bio br { display: block; content: ""; margin: .8rem 0; }
+
+.profile-info h2 {
+  text-align: center;      /* center only the name */
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+/* Optional: make the "About" heading centered above the bio if you like */
+.profile-info h3 {
+  color: var(--accent);
+  margin-top: 1rem;
+}
+
+.profile-info a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.profile-info a:hover {
+  text-decoration: underline;
+}
+
+/* ======= Bouton retour ======= */
+.back-btn {
+  margin: 1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #a1c1c7;
+}
+
+/* ======= Responsive ======= */
+@media (max-width: 600px) {
+  .card img {
+    height: 180px;
+  }
+
+  .profile img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile-info {
+    padding: 1.5rem;
+  }
+}
