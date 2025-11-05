@@ -23,7 +23,6 @@ fetch("data/people.json")
         <hr>
         <p><strong>Fun fact :</strong> ${person.funfact}</p>
         <hr>
-        <p><strong>Email :</strong> <a href="mailto:${person.email}">${person.email}</a></p>
         <p class="bio">${person.bio}</p>
       </div>
     `;

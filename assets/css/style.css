@@ -1,78 +1,157 @@
 /* ======= Variables et bases ======= */
 :root {
-  --bg: #f9fafb;
-  --card-bg: #ffffff;
-  --accent: #2a6f7b; /* violet indigo moderne */
-  --accent-light: #eef2ff;
-  --text-dark: #1e1e2f;
-  --text-light: #6b7280;
-  --shadow: rgba(79, 70, 229, 0.25);
+  --bg: #0f172a;
+  --bg-secondary: #1e293b;
+  --card-bg: #1e293b;
+  --card-hover: #334155;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-light: #dbeafe;
+  --text-dark: #f1f5f9;
+  --text-light: #94a3b8;
+  --text-muted: #64748b;
+  --border: #334155;
+  --shadow: rgba(59, 130, 246, 0.15);
+  --shadow-strong: rgba(59, 130, 246, 0.3);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background: linear-gradient(135deg, var(--bg) 0%, #1a1f35 100%);
   color: var(--text-dark);
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
 /* ======= Header ======= */
 header {
-  background: linear-gradient(90deg, var(--accent), #3998a8);
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
   color: white;
-  padding: 2rem 1rem;
+  padding: 1rem 0.5rem;
   text-align: center;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
 }
 
 header h1 {
   margin: 0;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 2.5rem;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 10px rgba(59, 130, 246, 0.5);
+}
+
+header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
 }
 
 /* ======= Grille principale ======= */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
-  max-width: 1200px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 3rem 2rem;
+  max-width: 1400px;
   margin: auto;
 }
 
 /* ======= Carte des personnes ======= */
 .card {
   background: var(--card-bg);
-  border-radius: 18px;
+  border-radius: 20px;
   overflow: hidden;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid var(--border);
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(59, 130, 246, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .card:hover {
-  transform: translateY(-6px) scale(1.04);
-  box-shadow: 0 10px 20px var(--shadow);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px var(--shadow-strong);
   border-color: var(--accent);
+  background: var(--card-hover);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card img {
   width: 100%;
-  height: 220px;
+  height: 280px;
   object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.1);
 }
 
 .card h3 {
-  margin: 0.7rem 0;
-  font-size: 1.1rem;
-  color: var(--accent);
+  margin: 1.2rem 0 0.5rem;
+  font-size: 1.25rem;
+  color: var(--accent-light);
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+  letter-spacing: 0.5px;
 }
 
 .card p {
-  color: var(--text-light);
-  margin-bottom: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 2;
 }
 
 /* ======= Page profil ======= */
@@ -80,101 +159,192 @@ header h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 1rem;
-  background: var(--accent-light);
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, var(--bg) 0%, #1a1f35 100%);
   min-height: 100vh;
-  /* keep header centered while content inside .profile-info will be left/justified */
   text-align: center;
 }
 
 .profile img {
-  width: 260px;
-  height: 260px;
+  width: 280px;
+  height: 280px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 6px 18px var(--shadow);
-  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 40px var(--shadow-strong);
+  margin-bottom: 2rem;
   border: 4px solid var(--accent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 50px var(--shadow-strong);
 }
 
 .profile-info {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 760px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-  text-align: left;          /* ensure internal text is left-aligned */
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 3rem;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  text-align: left;
   margin-top: 1rem;
+  border: 1px solid var(--border);
 }
 
 .profile-info h2 {
   margin-top: 0;
-  color: var(--accent);
-  font-size: 1.6rem;
+  color: var(--accent-light);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-.profile-info p,
-.profile-info .bio {
-  text-align: justify;       /* the requested justified alignment */
-  text-justify: inter-word;  /* improve justification spacing */
-  line-height: 1.9;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
+.profile-info p {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.8;
+  color: var(--text-light);
+  margin-bottom: 1.2rem;
   white-space: normal;
+  font-size: 1rem;
 }
 
-/* If you used <br> inside bio, keep normal white-space handling */
-.profile-info .bio br { display: block; content: ""; margin: .8rem 0; }
-
-.profile-info h2 {
-  text-align: center;      /* center only the name */
+.profile-info strong {
   color: var(--accent);
-  margin-bottom: 1rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
 }
 
-/* Optional: make the "About" heading centered above the bio if you like */
-.profile-info h3 {
-  color: var(--accent);
-  margin-top: 1rem;
+.profile-info .bio {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border);
+  font-size: 1.05rem;
+  line-height: 2;
+  color: var(--text-light);
+}
+
+.profile-info .bio br { 
+  display: block; 
+  content: ""; 
+  margin: 1rem 0; 
+}
+
+.profile-info hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 2rem 0;
 }
 
 .profile-info a {
   color: var(--accent);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.profile-info a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
 }
 
 .profile-info a:hover {
-  text-decoration: underline;
+  color: var(--accent-hover);
+}
+
+.profile-info a:hover::after {
+  width: 100%;
 }
 
 /* ======= Bouton retour ======= */
 .back-btn {
-  margin: 1rem;
-  background: var(--accent);
+  margin: 1.5rem;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
   color: white;
   border: none;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 8px;
-  padding: 0.6rem 1.2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.9rem 1.8rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  letter-spacing: 0.5px;
+  align-items: start;
 }
 
 .back-btn:hover {
-  background: #a1c1c7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.5);
+  background: linear-gradient(135deg, var(--accent-hover) 0%, #1d4ed8 100%);
+}
+
+.back-btn:active {
+  transform: translateY(0);
+}
+
+/* ======= Badges et sections ======= */
+.profile-info > p:has(strong) {
+  padding: 0.8rem 1.2rem;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 10px;
+  border-left: 3px solid var(--accent);
+  margin: 1rem 0;
 }
 
 /* ======= Responsive ======= */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+
   .card img {
-    height: 180px;
+    height: 220px;
   }
 
   .profile img {
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
+  }
+
+  .profile-info {
+    padding: 2rem 1.5rem;
+  }
+
+  .profile-info h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 2rem 1rem;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 
   .profile-info {

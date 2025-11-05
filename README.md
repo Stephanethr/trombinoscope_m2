@@ -23,7 +23,6 @@ It is built with **HTML, CSS, and JavaScript**, with data stored in a **JSON fil
      - Best coding achievement
      - Fun fact
      - Long biography
-     - Email
    - Back button to return to the main list.
 
 3. **JSON Data**
